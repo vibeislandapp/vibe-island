@@ -1,5 +1,5 @@
 name: "Bug Report"
-description: "Something isn't working as expected / 报告 Bug"
+description: "Something isn't working as expected"
 title: "[Bug] "
 labels: ["bug", "triage"]
 body:
@@ -7,7 +7,6 @@ body:
     attributes:
       value: |
         Thanks for reporting! Please fill in as much detail as you can.
-        感谢反馈！请尽量填写详细信息。
 
   - type: input
     id: version
@@ -30,7 +29,7 @@ body:
     id: cli-tool
     attributes:
       label: "CLI Tool"
-      description: "Which CLI tool were you using? / 你在使用哪个 CLI 工具？"
+      description: "Which CLI tool were you using?"
       options:
         - Claude Code
         - Codex
@@ -66,7 +65,7 @@ body:
   - type: textarea
     id: description
     attributes:
-      label: "What happened? / 发生了什么？"
+      label: "What happened?"
       placeholder: "When I..., I expected..., but instead..."
     validations:
       required: true
@@ -74,7 +73,7 @@ body:
   - type: textarea
     id: steps
     attributes:
-      label: "Steps to reproduce / 复现步骤"
+      label: "Steps to reproduce"
       placeholder: |
         1. Start a Claude Code session
         2. ...
@@ -85,7 +84,7 @@ body:
   - type: textarea
     id: logs
     attributes:
-      label: "Diagnostic logs / 诊断日志"
+      label: "Diagnostic logs"
       description: "Settings → About → Export Diagnostics. Attach the .zip here."
       render: text
     validations:
@@ -94,7 +93,7 @@ body:
   - type: textarea
     id: screenshots
     attributes:
-      label: "Screenshots or screen recordings / 截图或录屏"
+      label: "Screenshots or screen recordings"
       description: "Drag and drop images or videos here"
     validations:
       required: false
