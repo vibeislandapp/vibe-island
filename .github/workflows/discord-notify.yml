@@ -2,13 +2,16 @@ name: Discord Notifications
 
 on:
   issues:
-    types: [opened]
+    types: [opened, labeled]
   discussion:
     types: [created]
 
 jobs:
   notify-bug:
-    if: github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'bug')
+    if: >-
+      github.event_name == 'issues'
+      && contains(github.event.issue.labels.*.name, 'bug')
+      && (github.event.action == 'opened' || github.event.label.name == 'bug')
     runs-on: ubuntu-latest
     steps:
       - name: Post to #bugs (Forum)
@@ -49,8 +52,12 @@ jobs:
 
   notify-feature:
     if: >-
-      (github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'enhancement'))
-      || github.event_name == 'discussion'
+      github.event_name == 'discussion'
+      || (
+        github.event_name == 'issues'
+        && contains(github.event.issue.labels.*.name, 'enhancement')
+        && (github.event.action == 'opened' || github.event.label.name == 'enhancement')
+      )
     runs-on: ubuntu-latest
     steps:
       - name: Post to #feature-requests (Issue → Forum)

@@ -1,0 +1,44 @@
+name: Auto Triage Issues
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  apply-template-labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Apply labels for CLI-created issues
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const existing = new Set(issue.labels.map((label) => label.name));
+            const wanted = new Set();
+
+            if (/^\s*\[Bug\]/i.test(issue.title)) {
+              wanted.add("bug");
+              wanted.add("triage");
+            } else if (/^\s*\[Feature\]/i.test(issue.title)) {
+              wanted.add("enhancement");
+              wanted.add("triage");
+            }
+
+            const toAdd = [...wanted].filter((label) => !existing.has(label));
+            if (toAdd.length === 0) {
+              core.info("No template labels to add.");
+              return;
+            }
+
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              labels: toAdd,
+            });
+
+            core.info(`Added labels: ${toAdd.join(", ")}`);
