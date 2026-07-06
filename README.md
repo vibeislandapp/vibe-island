@@ -1,6 +1,6 @@
 # Vibe Island
 
-**Dynamic Island for your AI agents — a macOS notch panel for Claude Code, Codex, Gemini CLI, Cursor, and 20+ more.**
+**Dynamic Island for your AI agents — a macOS notch panel for 25 AI coding agents: Claude Code, Codex, Gemini CLI, Cursor, and more.**
 
 [![Website](https://img.shields.io/badge/Website-vibeisland.app-blue?style=flat-square&logo=google-chrome&logoColor=white)](https://vibeisland.app)
 [![Homebrew](https://img.shields.io/badge/Homebrew-Install-orange?style=flat-square&logo=homebrew&logoColor=white)](https://formulae.brew.sh/cask/vibe-island)
