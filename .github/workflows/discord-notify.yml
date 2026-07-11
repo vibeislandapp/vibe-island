@@ -8,10 +8,19 @@ on:
 
 jobs:
   notify-bug:
+    # Issue templates add default labels at creation, which also emits labeled
+    # events. Post on opened, or when a maintainer/bot classifies it later.
     if: >-
       github.event_name == 'issues'
       && contains(github.event.issue.labels.*.name, 'bug')
-      && (github.event.action == 'opened' || github.event.label.name == 'bug')
+      && (
+        github.event.action == 'opened'
+        || (
+          github.event.action == 'labeled'
+          && github.event.label.name == 'bug'
+          && github.event.sender.login != github.event.issue.user.login
+        )
+      )
     runs-on: ubuntu-latest
     steps:
       - name: Post to #bugs (Forum)
@@ -56,7 +65,14 @@ jobs:
       || (
         github.event_name == 'issues'
         && contains(github.event.issue.labels.*.name, 'enhancement')
-        && (github.event.action == 'opened' || github.event.label.name == 'enhancement')
+        && (
+          github.event.action == 'opened'
+          || (
+            github.event.action == 'labeled'
+            && github.event.label.name == 'enhancement'
+            && github.event.sender.login != github.event.issue.user.login
+          )
+        )
       )
     runs-on: ubuntu-latest
     steps:
