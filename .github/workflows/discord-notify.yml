@@ -3,8 +3,6 @@ name: Discord Notifications
 on:
   issues:
     types: [opened, labeled]
-  discussion:
-    types: [created]
 
 jobs:
   notify-bug:
@@ -61,23 +59,18 @@ jobs:
 
   notify-feature:
     if: >-
-      github.event_name == 'discussion'
-      || (
-        github.event_name == 'issues'
-        && contains(github.event.issue.labels.*.name, 'enhancement')
-        && (
-          github.event.action == 'opened'
-          || (
-            github.event.action == 'labeled'
-            && github.event.label.name == 'enhancement'
-            && github.event.sender.login != github.event.issue.user.login
-          )
+      contains(github.event.issue.labels.*.name, 'enhancement')
+      && (
+        github.event.action == 'opened'
+        || (
+          github.event.action == 'labeled'
+          && github.event.label.name == 'enhancement'
+          && github.event.sender.login != github.event.issue.user.login
         )
       )
     runs-on: ubuntu-latest
     steps:
       - name: Post to #feature-requests (Issue → Forum)
-        if: github.event_name == 'issues'
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_FEATURES }}
           ISSUE_TITLE: ${{ github.event.issue.title }}
@@ -107,39 +100,6 @@ jobs:
                 color: 5025616,
                 fields: [
                   {name: "Labels", value: $labels, inline: true},
-                  {name: "Author", value: ("[@" + $author + "](" + $author_url + ")"), inline: true}
-                ],
-                footer: {text: "Vibe Island Community"}
-              }]
-            }' | curl -s -H "Content-Type: application/json" -d @- "$DISCORD_WEBHOOK"
-
-      - name: Post to #feature-requests (Discussion → Forum)
-        if: github.event_name == 'discussion'
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_FEATURES }}
-          DISC_TITLE: ${{ github.event.discussion.title }}
-          DISC_URL: ${{ github.event.discussion.html_url }}
-          DISC_CATEGORY: ${{ github.event.discussion.category.name }}
-          DISC_AUTHOR: ${{ github.event.discussion.user.login }}
-          DISC_AUTHOR_URL: ${{ github.event.discussion.user.html_url }}
-        run: |
-          TITLE=$(echo "$DISC_TITLE" | head -c 200)
-
-          jq -n \
-            --arg thread_name "$TITLE" \
-            --arg title "$TITLE" \
-            --arg url "$DISC_URL" \
-            --arg category "$DISC_CATEGORY" \
-            --arg author "$DISC_AUTHOR" \
-            --arg author_url "$DISC_AUTHOR_URL" \
-            '{
-              thread_name: $thread_name,
-              embeds: [{
-                title: ("\ud83d\udcac " + $title),
-                url: $url,
-                description: ("Category: " + $category),
-                color: 5793266,
-                fields: [
                   {name: "Author", value: ("[@" + $author + "](" + $author_url + ")"), inline: true}
                 ],
                 footer: {text: "Vibe Island Community"}
