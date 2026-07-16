@@ -8,7 +8,9 @@
 [![Stars](https://img.shields.io/github/stars/vibeislandapp/vibe-island?style=flat-square&logo=github)](https://github.com/vibeislandapp/vibe-island/stargazers)
 [![Discord](https://img.shields.io/badge/Discord-Join-5865F2?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/2GmjPVtc3d)
 
-![Vibe Island — macOS notch panel for AI coding agents](https://vibeisland.app/images/og.jpg)
+[![Vibe Island — macOS notch panel for AI coding agents (video demo)](https://vibeisland.app/images/og.jpg)](https://www.youtube.com/watch?v=_nh_OE5aSwI)
+
+▶ **[Watch the demo on YouTube](https://www.youtube.com/watch?v=_nh_OE5aSwI)** — Vibe Island monitoring Claude Code, Codex & more in the Mac notch
 
 Vibe Island turns the MacBook notch into a real-time control surface for AI coding agents. See what every session is doing at a glance, approve permission requests without switching windows, answer agent questions with one click, and jump straight back to the exact terminal tab or IDE window that needs you.
 
