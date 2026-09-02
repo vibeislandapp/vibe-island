@@ -81,14 +81,14 @@ body:
     validations:
       required: false
 
-  - type: textarea
+  - type: upload
     id: logs
     attributes:
-      label: "Diagnostic logs"
-      description: "Settings → About → Export Diagnostics. Attach the .zip here."
-      render: text
+      label: "Diagnostic report"
+      description: "Settings → About → Export Diagnostic Report. The report redacts known sensitive fields; please review it before uploading because issue attachments are public."
     validations:
       required: false
+      accept: ".zip"
 
   - type: textarea
     id: screenshots

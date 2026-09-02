@@ -54,7 +54,7 @@ This is the community home for Vibe Island: bug reports, feature requests, and d
 
 [**Open a Bug Report →**](https://github.com/vibeislandapp/vibe-island/issues/new?template=bug_report.yml)
 
-Include your Vibe Island version, macOS version, and the CLI tool you were using. Attach diagnostic logs if possible (Settings → About → Export Diagnostics).
+Include your Vibe Island version, macOS version, and the CLI tool you were using. Attach a diagnostic report if possible (Settings → About → Export Diagnostic Report).
 
 ### Request a feature
 
